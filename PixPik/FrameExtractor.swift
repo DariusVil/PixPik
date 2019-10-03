@@ -10,7 +10,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let position = AVCaptureDevice.Position.back
     private let quality = AVCaptureSession.Preset.photo
     
-    private var permissionGranted = false
+    private var isPermissionGranted = false
     private let sessionQueue = DispatchQueue(label: "session queue")
     private let captureSession = AVCaptureSession()
     private let context = CIContext()
@@ -20,34 +20,34 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     override init() {
         super.init()
         checkPermission()
-        sessionQueue.async { [unowned self] in
-            self.configureSession()
-            self.captureSession.startRunning()
+        sessionQueue.async { [weak self] in
+            self?.configureSession()
+            self?.captureSession.startRunning()
         }
     }
     
-    // MARK: AVSession configuration
     private func checkPermission() {
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
         case .authorized:
-            permissionGranted = true
+            isPermissionGranted = true
         case .notDetermined:
             requestPermission()
         default:
-            permissionGranted = false
+            isPermissionGranted = false
         }
     }
     
     private func requestPermission() {
         sessionQueue.suspend()
-        AVCaptureDevice.requestAccess(for: AVMediaType.video) { [unowned self] granted in
-            self.permissionGranted = granted
-            self.sessionQueue.resume()
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] isGranted in
+            self?.isPermissionGranted = isGranted
+            self?.sessionQueue.resume()
         }
     }
     
     private func configureSession() {
-        guard permissionGranted else { return }
+        guard isPermissionGranted else { return }
+        
         captureSession.sessionPreset = quality
         guard let captureDevice = selectCaptureDevice() else { return }
         guard let captureDeviceInput = try? AVCaptureDeviceInput(device: captureDevice) else { return }
@@ -75,8 +75,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
-        DispatchQueue.main.async { [unowned self] in
-            self.delegate?.captured(image: uiImage)
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.captured(image: uiImage)
         }
     }
 }
