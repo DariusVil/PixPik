@@ -6,6 +6,7 @@ final class CameraViewController: UIViewController {
     
     private lazy var cameraView: CameraView = {
         let view = CameraView()
+        view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -50,5 +51,20 @@ extension CameraViewController: FrameExtractorDelegate {
         let pixelizedImage = UIImage(ciImage: pixelizedCImage)
         
         cameraView.update(with: pixelizedImage)
+    }
+}
+
+extension CameraViewController: CameraViewDelegate {
+    
+    func shutterTapped(in: CameraView) {
+        
+    }
+    
+    func switchTapped(in: CameraView) {
+        
+    }
+    
+    func libraryTapped(in: CameraView) {
+        
     }
 }
