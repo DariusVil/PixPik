@@ -37,6 +37,7 @@ final class CameraViewController: UIViewController {
     private func pixelize(image: CIImage, intensity: Double) -> CIImage? {
         let filter = CIFilter(name:"CIPixellate")
         filter?.setValue(image, forKey: kCIInputImageKey)
+        filter?.setValue(50, forKey: kCIInputScaleKey)
         return filter?.outputImage
     }
 }
@@ -44,7 +45,7 @@ final class CameraViewController: UIViewController {
 extension CameraViewController: FrameExtractorDelegate {
     
     func captured(image: CIImage) {
-        guard let pixelizedCImage = pixelize(image: image, intensity:0.9) else {
+        guard let pixelizedCImage = pixelize(image: image, intensity:5) else {
             return
         }
         
