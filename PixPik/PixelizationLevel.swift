@@ -7,8 +7,8 @@ enum PixelizationLevel: Int {
     var intensity: Int {
         switch self {
         case .small: return 10
-        case .medium: return 20
-        case .large: return 30
+        case .medium: return 40
+        case .large: return 80
         }
     }
     

@@ -79,8 +79,19 @@ final class CameraView: UIView {
     }
     
     private func setup() {
+        setupSwipeGestures()
         addImageView()
         addButtons()
+    }
+    
+    private func setupSwipeGestures() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGestures))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        addGestureRecognizer(swipeRight)
+
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGestures))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        addGestureRecognizer(swipeLeft)
     }
     
     private func addImageView() {
@@ -118,5 +129,20 @@ final class CameraView: UIView {
     
     @objc func libraryTapped(gesture: UIGestureRecognizer) {
         delegate?.libraryTapped(in: self)
+    }
+    
+    @objc func respondToSwipeGestures(gesture: UIGestureRecognizer)
+    {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer
+        {
+            switch swipeGesture.direction
+            {
+            case UISwipeGestureRecognizer.Direction.right:
+                delegate?.pixelizationLevelIncreased(in: self)
+            case UISwipeGestureRecognizer.Direction.left:
+                delegate?.pixelizationLevelDecreased(in: self)
+            default: break
+            }
+        }
     }
 }

@@ -6,6 +6,8 @@ final class CameraViewController: UIViewController {
     
     private var pixelizationLevel: PixelizationLevel = .medium
     
+    private var currentImage: UIImage?
+    
     private lazy var cameraView: CameraView = {
         let view = CameraView()
         view.delegate = self
@@ -36,7 +38,7 @@ final class CameraViewController: UIViewController {
         ])
     }
     
-    private func pixelize(image: CIImage, intensity: Double) -> CIImage? {
+    private func pixelize(image: CIImage) -> CIImage? {
         let filter = CIFilter(name:"CIPixellate")
         filter?.setValue(image, forKey: kCIInputImageKey)
         filter?.setValue(pixelizationLevel.intensity, forKey: kCIInputScaleKey)
@@ -47,13 +49,14 @@ final class CameraViewController: UIViewController {
 extension CameraViewController: FrameExtractorDelegate {
     
     func captured(image: CIImage) {
-        guard let pixelizedCImage = pixelize(image: image, intensity:5) else {
+        guard let pixelizedCImage = pixelize(image: image) else {
             return
         }
         
         let pixelizedImage = UIImage(ciImage: pixelizedCImage)
         
         cameraView.update(with: pixelizedImage)
+        currentImage = pixelizedImage
     }
 }
 
@@ -68,7 +71,10 @@ extension CameraViewController: CameraViewDelegate {
     }
 
     func shutterTapped(in: CameraView) {
+        guard let currentImage = currentImage else { return }
+        let previewViewController = PreviewViewController(image: currentImage)
         
+        navigationController?.pushViewController(previewViewController, animated: true)
     }
     
     func switchTapped(in: CameraView) {
