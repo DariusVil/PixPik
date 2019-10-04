@@ -1,15 +1,17 @@
 import UIKit
 
-protocol CameraViewDelegate {
+protocol CameraViewDelegate: class {
     
     func shutterTapped(in: CameraView)
     func switchTapped(in: CameraView)
     func libraryTapped(in: CameraView)
+    func pixelizationLevelIncreased(in: CameraView)
+    func pixelizationLevelDecreased(in: CameraView)
 }
 
 final class CameraView: UIView {
     
-    var delegate: CameraViewDelegate?
+    weak var delegate: CameraViewDelegate?
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()

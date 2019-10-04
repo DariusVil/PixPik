@@ -10,6 +10,7 @@
 		694B23A52346678300DC565A /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694B23A42346678300DC565A /* CameraView.swift */; };
 		694B23A7234685CE00DC565A /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694B23A6234685CE00DC565A /* PreviewViewController.swift */; };
 		694B23A9234685D400DC565A /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694B23A8234685D400DC565A /* PreviewView.swift */; };
+		6968996D2347B30200324F4A /* PixelizationLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968996C2347B30200324F4A /* PixelizationLevel.swift */; };
 		697ECAA32346613300F9954F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECAA22346613300F9954F /* AppDelegate.swift */; };
 		697ECAA52346613300F9954F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECAA42346613300F9954F /* SceneDelegate.swift */; };
 		697ECAA92346613400F9954F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 697ECAA82346613400F9954F /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		694B23A42346678300DC565A /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		694B23A6234685CE00DC565A /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		694B23A8234685D400DC565A /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		6968996C2347B30200324F4A /* PixelizationLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelizationLevel.swift; sourceTree = "<group>"; };
 		697ECA9F2346613300F9954F /* PixPik.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixPik.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		697ECAA22346613300F9954F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		697ECAA42346613300F9954F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				697ECAA42346613300F9954F /* SceneDelegate.swift */,
 				697ECAB62346615000F9954F /* CameraViewController.swift */,
 				694B23A42346678300DC565A /* CameraView.swift */,
+				6968996C2347B30200324F4A /* PixelizationLevel.swift */,
 				694B23A6234685CE00DC565A /* PreviewViewController.swift */,
 				694B23A8234685D400DC565A /* PreviewView.swift */,
 				697ECAB82346618F00F9954F /* FrameExtractor.swift */,
@@ -160,6 +163,7 @@
 			files = (
 				697ECAA32346613300F9954F /* AppDelegate.swift in Sources */,
 				697ECAA52346613300F9954F /* SceneDelegate.swift in Sources */,
+				6968996D2347B30200324F4A /* PixelizationLevel.swift in Sources */,
 				694B23A9234685D400DC565A /* PreviewView.swift in Sources */,
 				697ECAB92346618F00F9954F /* FrameExtractor.swift in Sources */,
 				694B23A52346678300DC565A /* CameraView.swift in Sources */,
