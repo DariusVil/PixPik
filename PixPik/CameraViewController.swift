@@ -3,9 +3,7 @@ import UIKit
 final class CameraViewController: UIViewController {
     
     private var frameExtractor: FrameExtractor?
-    
     private var pixelizationLevel: PixelizationLevel = .medium
-    
     private var currentImage: UIImage?
     
     private lazy var cameraView: CameraView = {
@@ -54,8 +52,11 @@ final class CameraViewController: UIViewController {
         return filter?.outputImage
     }
     
-    private func showPreview(image: UIImage) {
-        let previewViewController = PreviewViewController(image: image)
+    private func showPreview(image: UIImage, pixelizationLevel: PixelizationLevel) {
+        let previewViewController = PreviewViewController(
+            image: image,
+            pixelizationLevel: pixelizationLevel
+        )
         navigationController?.pushViewController(previewViewController, animated: true)
     }
 }
@@ -70,7 +71,8 @@ extension CameraViewController: FrameExtractorDelegate {
         let pixelizedImage = UIImage(ciImage: pixelizedCImage)
         
         cameraView.update(with: pixelizedImage)
-        currentImage = pixelizedImage
+        
+        currentImage = UIImage(ciImage: image)
     }
 }
 
@@ -86,7 +88,7 @@ extension CameraViewController: CameraViewDelegate {
 
     func shutterTapped(in: CameraView) {
         guard let currentImage = currentImage else { return }
-        showPreview(image: currentImage)
+        showPreview(image: currentImage, pixelizationLevel: pixelizationLevel)
     }
     
     func switchTapped(in: CameraView) {
@@ -108,7 +110,8 @@ extension CameraViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
         picker.dismiss(animated: true, completion: { [weak self] in
-            self?.showPreview(image: image)
+            guard let pixelizationLevel = self?.pixelizationLevel else { return }
+            self?.showPreview(image: image, pixelizationLevel: pixelizationLevel)
         })
     }
 }

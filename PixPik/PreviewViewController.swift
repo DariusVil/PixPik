@@ -13,8 +13,10 @@ final class PreviewViewController: UIViewController {
         return view
     }()
     
-    init(image: UIImage) {
+    init(image: UIImage, pixelizationLevel: PixelizationLevel) {
         self.image = image
+        self.pixelizationLevel = pixelizationLevel
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,7 +40,28 @@ final class PreviewViewController: UIViewController {
             previewView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
-        previewView.update(with: image)
+        applyFilter()
+    }
+    
+    private func applyFilter() {
+        guard let ciImage = makeCIImage(from: image) else {
+            return
+        }
+        
+        let filter = CIFilter(name:"CIPixellate")
+        filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        filter?.setValue(pixelizationLevel.intensity, forKey: kCIInputScaleKey)
+        guard let pixelizedCIImage = filter?.outputImage else { return }
+        let pixelizedImage = UIImage(ciImage: pixelizedCIImage)
+        previewView.update(with: pixelizedImage)
+    }
+    
+    private func makeCIImage(from image: UIImage) -> CIImage? {
+        if let ciImage = image.ciImage {
+            return ciImage
+        } else {
+            return CIImage(image: image)
+        }
     }
 }
 
@@ -55,9 +78,11 @@ extension PreviewViewController: PreviewViewDelegate {
     
     func pixelizationLevelIncreased(in: PreviewView) {
         pixelizationLevel = pixelizationLevel.incrementedValue
+        applyFilter()
     }
     
     func pixelizationLevelDecreased(in: PreviewView) {
         pixelizationLevel = pixelizationLevel.decrementedValue
+        applyFilter()
     }
 }

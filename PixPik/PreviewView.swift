@@ -83,6 +83,33 @@ final class PreviewView: UIView {
         
         addImageView()
         addButtons()
+        addSwipeGestures()
+    }
+    
+    private func addSwipeGestures() {
+        let swipeLeftGesture = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(handleSwipeGesture)
+        )
+        swipeLeftGesture.direction = .left
+        addGestureRecognizer(swipeLeftGesture)
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(handleSwipeGesture)
+        )
+        swipeRightGesture.direction = .right
+        addGestureRecognizer(swipeRightGesture)
+    }
+
+    @objc private func handleSwipeGesture(gesture: UIGestureRecognizer) {
+        guard let swipeGesture = gesture as? UISwipeGestureRecognizer else { return }
+        
+        switch swipeGesture.direction {
+        case .right: delegate?.pixelizationLevelIncreased(in: self)
+        case .left: delegate?.pixelizationLevelDecreased(in: self)
+        default: break
+        }
     }
     
     private func addImageView() {
