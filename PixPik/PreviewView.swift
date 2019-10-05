@@ -79,6 +79,8 @@ final class PreviewView: UIView {
     }
     
     private func setup() {
+        backgroundColor = .black
+        
         addImageView()
         addButtons()
     }
