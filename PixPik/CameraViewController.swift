@@ -14,6 +14,15 @@ final class CameraViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    private lazy var imagePicker: UIImagePickerController = {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.mediaTypes = ["public.image"]
+        pickerController.sourceType = .photoLibrary
+        return pickerController
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +53,11 @@ final class CameraViewController: UIViewController {
         filter?.setValue(pixelizationLevel.intensity, forKey: kCIInputScaleKey)
         return filter?.outputImage
     }
+    
+    private func showPreview(image: UIImage) {
+        let previewViewController = PreviewViewController(image: image)
+        navigationController?.pushViewController(previewViewController, animated: true)
+    }
 }
 
 extension CameraViewController: FrameExtractorDelegate {
@@ -72,9 +86,7 @@ extension CameraViewController: CameraViewDelegate {
 
     func shutterTapped(in: CameraView) {
         guard let currentImage = currentImage else { return }
-        let previewViewController = PreviewViewController(image: currentImage)
-        
-        navigationController?.pushViewController(previewViewController, animated: true)
+        showPreview(image: currentImage)
     }
     
     func switchTapped(in: CameraView) {
@@ -87,6 +99,20 @@ extension CameraViewController: CameraViewDelegate {
     }
     
     func libraryTapped(in: CameraView) {
-        
+        navigationController?.present(imagePicker, animated: true, completion: nil)
     }
+}
+
+extension CameraViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else { return }
+        picker.dismiss(animated: true, completion: { [weak self] in
+            self?.showPreview(image: image)
+        })
+    }
+}
+
+extension CameraViewController: UINavigationControllerDelegate {
+    
 }
