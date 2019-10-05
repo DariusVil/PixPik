@@ -71,6 +71,12 @@ extension PreviewViewController: PreviewViewDelegate {
     }
     
     func shareTapped(in: PreviewView) {
+        guard let image = previewView.imageView.image else { return }
+        let imageToShare = [image]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+
+        navigationController?.present(activityViewController, animated: true, completion: nil)
     }
     
     func saveTapped(in: PreviewView) {

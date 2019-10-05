@@ -13,7 +13,7 @@ final class PreviewView: UIView {
     
     weak var delegate: PreviewViewDelegate?
     
-    private lazy var imageView: UIImageView = {
+    private(set) lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
