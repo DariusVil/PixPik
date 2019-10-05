@@ -7,7 +7,7 @@ protocol FrameExtractorDelegate: class {
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
-    private let position = AVCaptureDevice.Position.back
+    private(set) var position = AVCaptureDevice.Position.back
     private let quality = AVCaptureSession.Preset.photo
     
     private var isPermissionGranted = false
@@ -17,7 +17,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     weak var delegate: FrameExtractorDelegate?
     
-    override init() {
+    init(position: AVCaptureDevice.Position) {
+        self.position = position
         super.init()
         checkPermission()
         sessionQueue.async { [weak self] in

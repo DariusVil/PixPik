@@ -23,7 +23,7 @@ final class CameraViewController: UIViewController {
     }
     
     private func setupFrameExtractor() {
-        frameExtractor = FrameExtractor()
+        frameExtractor = FrameExtractor(position: .back)
         frameExtractor?.delegate = self
     }
     
@@ -78,7 +78,12 @@ extension CameraViewController: CameraViewDelegate {
     }
     
     func switchTapped(in: CameraView) {
+        guard let currentCameraPosition = frameExtractor?.position else { return }
         
+        frameExtractor = FrameExtractor(
+            position: currentCameraPosition == .back ? .front : .back
+        )
+        frameExtractor?.delegate = self
     }
     
     func libraryTapped(in: CameraView) {
