@@ -2,7 +2,6 @@ import UIKit
 
 protocol PreviewViewDelegate: class {
     
-    func dismissTapped(in: PreviewView)
     func shareTapped(in: PreviewView)
     func saveTapped(in: PreviewView)
     func pixelizationLevelIncreased(in: PreviewView)
@@ -17,18 +16,6 @@ final class PreviewView: UIView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private lazy var dismissButtonImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "shutter_button"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.isUserInteractionEnabled = true
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissTapped))
-        imageView.addGestureRecognizer(tapGesture)
-        
         return imageView
     }()
     
@@ -125,7 +112,6 @@ final class PreviewView: UIView {
     
     private func addButtons() {
         addSubview(buttonStackView)
-        buttonStackView.addArrangedSubview(dismissButtonImageView)
         buttonStackView.addArrangedSubview(shareButtonImageView)
         buttonStackView.addArrangedSubview(saveButtonImageView)
         
@@ -135,10 +121,6 @@ final class PreviewView: UIView {
             buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             buttonStackView.heightAnchor.constraint(equalToConstant: 200)
         ])
-    }
-    
-    @objc func dismissTapped(gesture: UIGestureRecognizer) {
-        delegate?.dismissTapped(in: self)
     }
     
     @objc func shareTapped(gesture: UIGestureRecognizer) {

@@ -67,19 +67,57 @@ final class PreviewViewController: UIViewController {
 
 extension PreviewViewController: PreviewViewDelegate {
     
-    func dismissTapped(in: PreviewView) {
-    }
-    
     func shareTapped(in: PreviewView) {
         guard let image = previewView.imageView.image else { return }
         let imageToShare = [image]
         let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.completionWithItemsHandler = { [weak self] (_, isSuccess, _, _) in
+            self?.handleShared(isSuccess: isSuccess)
+        }
 
         navigationController?.present(activityViewController, animated: true, completion: nil)
     }
     
+    func handleShared(isSuccess: Bool) {
+        let alertController = isSuccess ?
+            UIAlertController(title: "Success", message: "Photo shared", preferredStyle: .alert) :
+            UIAlertController(title: "Fail", message: "There was a problem sharing your image", preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
+        
+        navigationController?.present(alertController, animated: true, completion: nil)
+    }
+    
     func saveTapped(in: PreviewView) {
+        guard let image = previewView.imageView.image else { return }
+        
+        // This image recreation is needed, because if image has ciImage saving will fail without error
+        guard let ciImage = image.ciImage else { return }
+        guard let cgImage = cgImage(from: ciImage) else { return }
+        let newImage = UIImage(cgImage: cgImage)
+        
+        UIImageWriteToSavedPhotosAlbum(newImage, self, #selector(saved), nil)
+    }
+    
+    func cgImage(from ciImage: CIImage) -> CGImage? {
+        let context = CIContext(options: nil)
+        return context.createCGImage(ciImage, from: ciImage.extent)
+    }
+    
+    @objc func saved(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
+        let alertController =
+            error == nil ?
+            UIAlertController(title: "Success", message: "Photo saved", preferredStyle: .alert) :
+            UIAlertController(title: "Fail", message: "There was a problem saving your image", preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
+        
+        navigationController?.present(alertController, animated: true, completion: nil)
     }
     
     func pixelizationLevelIncreased(in: PreviewView) {
