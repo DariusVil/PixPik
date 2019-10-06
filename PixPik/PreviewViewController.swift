@@ -89,14 +89,19 @@ extension PreviewViewController: PreviewViewDelegate {
         let imageToShare = [image]
         let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
-        activityViewController.completionWithItemsHandler = { [weak self] (_, isSuccess, _, _) in
-            self?.handleShared(isSuccess: isSuccess)
+        activityViewController.completionWithItemsHandler = { [weak self] (_, isSuccess, _, error) in
+            self?.handleShared(isSuccess: isSuccess, error: error)
         }
 
         navigationController?.present(activityViewController, animated: true, completion: nil)
     }
     
-    func handleShared(isSuccess: Bool) {
+    func handleShared(isSuccess: Bool, error: Error?) {
+        // Early return of the user just closed the share dialog
+        if !isSuccess && error == nil {
+            return
+        }
+        
         let alertController = isSuccess ?
             UIAlertController(title: "Success", message: "Photo shared", preferredStyle: .alert) :
             UIAlertController(title: "Fail", message: "There was a problem sharing your image", preferredStyle: .alert)
@@ -125,15 +130,20 @@ extension PreviewViewController: PreviewViewDelegate {
     }
     
     @objc func saved(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
-        let alertController =
-            error == nil ?
-            UIAlertController(title: "Success", message: "Photo saved", preferredStyle: .alert) :
-            UIAlertController(title: "Fail", message: "There was a problem saving your image", preferredStyle: .alert)
+        let alertController: UIAlertController
         
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
-        }))
-        
+        if error == nil {
+            alertController = UIAlertController(title: "Success", message: "Photo saved", preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }))
+        } else {
+           alertController = UIAlertController(title: "Fail", message: "There was a problem saving your image. Please try again", preferredStyle: .alert)
+            
+           alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        }
+
         navigationController?.present(alertController, animated: true, completion: nil)
     }
     
