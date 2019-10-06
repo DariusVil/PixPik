@@ -115,7 +115,7 @@ final class CameraView: UIView {
             transparentView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             transparentView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             transparentView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
-            transparentView.heightAnchor.constraint(equalToConstant: 100)
+            transparentView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     
@@ -141,7 +141,7 @@ final class CameraView: UIView {
             buttonStackView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            buttonStackView.heightAnchor.constraint(equalToConstant: 100)
+            buttonStackView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     

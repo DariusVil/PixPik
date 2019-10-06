@@ -2,6 +2,7 @@ import UIKit
 
 protocol PreviewViewDelegate: class {
     
+    func closeTapped(in: PreviewView)
     func shareTapped(in: PreviewView)
     func saveTapped(in: PreviewView)
     func pixelizationLevelIncreased(in: PreviewView)
@@ -17,6 +18,18 @@ final class PreviewView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 12
+        return imageView
+    }()
+    
+    private lazy var closeButtonImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "appbar.close"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+        imageView.contentMode = .scaleAspectFit
+
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeTapped))
+        imageView.addGestureRecognizer(gestureRecognizer)
+        
         return imageView
     }()
     
@@ -92,7 +105,7 @@ final class PreviewView: UIView {
             transparentView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             transparentView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             transparentView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
-            transparentView.heightAnchor.constraint(equalToConstant: 100)
+            transparentView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
 
@@ -141,9 +154,18 @@ final class PreviewView: UIView {
         
         NSLayoutConstraint.activate([
             buttonStackView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
-            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            buttonStackView.heightAnchor.constraint(equalToConstant: 100)
+            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
+            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
+            buttonStackView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        addSubview(closeButtonImageView)
+        
+        NSLayoutConstraint.activate([
+            closeButtonImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            closeButtonImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            closeButtonImageView.widthAnchor.constraint(equalToConstant: 50),
+            closeButtonImageView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -153,5 +175,9 @@ final class PreviewView: UIView {
     
     @objc func saveTapped(gesture: UIGestureRecognizer) {
         delegate?.saveTapped(in: self)
+    }
+    
+    @objc func closeTapped(gesture: UIGestureRecognizer) {
+        delegate?.closeTapped(in: self)
     }
 }

@@ -28,11 +28,7 @@ final class CameraViewController: UIViewController {
         setupFrameExtractor()
         setupView()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
+
     private func setupFrameExtractor() {
         frameExtractor = FrameExtractor(position: .back)
         frameExtractor?.delegate = self

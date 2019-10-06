@@ -30,8 +30,8 @@ final class PreviewViewController: UIViewController {
         setupView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: true)
+    @objc private func handleBackTapped() {
+        navigationController?.popViewController(animated: true)
     }
     
     private func setupView() {
@@ -80,6 +80,10 @@ final class PreviewViewController: UIViewController {
 
 extension PreviewViewController: PreviewViewDelegate {
     
+    func closeTapped(in: PreviewView) {
+        navigationController?.popViewController(animated: true)
+    }
+
     func shareTapped(in: PreviewView) {
         guard let image = previewView.imageView.image else { return }
         let imageToShare = [image]
