@@ -16,12 +16,13 @@ final class CameraView: UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 12
         return imageView
     }()
     
     private lazy var shutterButtonImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "shutter_button"))
+        let imageView = UIImageView(image: UIImage(named: "appbar.location.circle"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
@@ -33,7 +34,7 @@ final class CameraView: UIView {
     }()
     
     private lazy var cameraSwitchButtonImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "camera_switch_button"))
+        let imageView = UIImageView(image: UIImage(named: "appbar.camera.switch"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true;
@@ -45,7 +46,7 @@ final class CameraView: UIView {
     }()
     
     private lazy var libraryButtonImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "library_button"))
+        let imageView = UIImageView(image: UIImage(named: "appbar.image.gallery"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true;
@@ -65,6 +66,16 @@ final class CameraView: UIView {
         return stackView
     }()
     
+    private lazy var transparentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.init(displayP3Red: 0, green: 0, blue: 0, alpha: 0.4)
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
+        view.layer.maskedCorners = [ .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -79,8 +90,11 @@ final class CameraView: UIView {
     }
     
     private func setup() {
+        backgroundColor = .black
+        
         setupSwipeGestures()
         addImageView()
+        addTransparentView()
         addButtons()
     }
     
@@ -94,14 +108,26 @@ final class CameraView: UIView {
         addGestureRecognizer(swipeLeft)
     }
     
-    private func addImageView() {
-        addSubview(imageView)
+    private func addTransparentView() {
+        addSubview(transparentView)
         
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            transparentView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            transparentView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            transparentView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+            transparentView.heightAnchor.constraint(equalToConstant: 100)
+        ])
+    }
+    
+    private func addImageView() {
+        addSubview(imageView)
+
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            imageView.widthAnchor.constraint(equalTo: widthAnchor),
+            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 4/3)
         ])
     }
     
@@ -112,10 +138,10 @@ final class CameraView: UIView {
         buttonStackView.addArrangedSubview(cameraSwitchButtonImageView)
         
         NSLayoutConstraint.activate([
-            buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            buttonStackView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            buttonStackView.heightAnchor.constraint(equalToConstant: 200)
+            buttonStackView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
     

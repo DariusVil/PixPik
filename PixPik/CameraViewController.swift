@@ -29,6 +29,10 @@ final class CameraViewController: UIViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     private func setupFrameExtractor() {
         frameExtractor = FrameExtractor(position: .back)
         frameExtractor?.delegate = self
@@ -49,7 +53,13 @@ final class CameraViewController: UIViewController {
         let filter = CIFilter(name:"CIPixellate")
         filter?.setValue(image, forKey: kCIInputImageKey)
         filter?.setValue(pixelizationLevel.intensity, forKey: kCIInputScaleKey)
-        return filter?.outputImage
+        return filter?.outputImage!.cropped(to: CGRect(
+            x: 0,
+            y: 0,
+            width: image.extent.size.width - CGFloat(integerLiteral: pixelizationLevel.intensity) * 2,
+            height: image.extent.size.height - CGFloat(integerLiteral: pixelizationLevel.intensity) * 2
+            )
+        )
     }
     
     private func showPreview(image: UIImage, pixelizationLevel: PixelizationLevel) {

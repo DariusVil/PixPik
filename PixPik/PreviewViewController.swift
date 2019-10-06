@@ -30,6 +30,10 @@ final class PreviewViewController: UIViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     private func setupView() {
         view.addSubview(previewView)
         
@@ -52,7 +56,16 @@ final class PreviewViewController: UIViewController {
         filter?.setValue(ciImage, forKey: kCIInputImageKey)
         filter?.setValue(pixelizationLevel.intensity, forKey: kCIInputScaleKey)
         guard let pixelizedCIImage = filter?.outputImage else { return }
-        let pixelizedImage = UIImage(ciImage: pixelizedCIImage)
+        
+        let croppedImage = pixelizedCIImage.cropped(to: CGRect(
+            x: 0,
+            y: 0,
+            width: ciImage.extent.size.width - CGFloat(integerLiteral: pixelizationLevel.intensity) * 2,
+            height: ciImage.extent.size.height - CGFloat(integerLiteral: pixelizationLevel.intensity) * 2
+            )
+        )
+        
+        let pixelizedImage = UIImage(ciImage: croppedImage)
         previewView.update(with: pixelizedImage)
     }
     
