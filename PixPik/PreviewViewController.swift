@@ -52,7 +52,7 @@ final class PreviewViewController: UIViewController {
             return
         }
         
-        let filter = CIFilter(name:"CIPixellate")
+        let filter = CIFilter(name:"CIHexagonalPixellate")
         filter?.setValue(ciImage, forKey: kCIInputImageKey)
         filter?.setValue(pixelizationLevel.intensity, forKey: kCIInputScaleKey)
         guard let pixelizedCIImage = filter?.outputImage else { return }
