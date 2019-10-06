@@ -25,8 +25,18 @@ final class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showSwipeMessage()
         setupFrameExtractor()
         setupView()
+    }
+    
+    private func showSwipeMessage() {
+        if UserDefaults.isFirstLaunch() {
+            let alert = UIAlertController(title: "Tip", message: "To change pixelation swipe left or right", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
+            
+            navigationController?.present(alert, animated: true, completion: nil)
+        }
     }
 
     private func setupFrameExtractor() {
