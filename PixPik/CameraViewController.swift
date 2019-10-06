@@ -46,7 +46,7 @@ final class CameraViewController: UIViewController {
     }
     
     private func pixelize(image: CIImage) -> CIImage? {
-        let filter = CIFilter(name:"CIPixellate")
+        let filter = CIFilter(name:"CIHexagonalPixellate")
         filter?.setValue(image, forKey: kCIInputImageKey)
         filter?.setValue(pixelizationLevel.intensity, forKey: kCIInputScaleKey)
         return filter?.outputImage!.cropped(to: CGRect(
