@@ -116,8 +116,6 @@ extension CameraViewController: UIImagePickerControllerDelegate {
     }
 }
 
-extension CameraViewController: UINavigationControllerDelegate {
-    
-}
-
+// Needed for UIImagePickerControllerDelegate
+extension CameraViewController: UINavigationControllerDelegate { }
 extension CameraViewController: Pixelizeable {}
