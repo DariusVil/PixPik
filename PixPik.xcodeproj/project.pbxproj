@@ -12,6 +12,7 @@
 		694B23A9234685D400DC565A /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694B23A8234685D400DC565A /* PreviewView.swift */; };
 		6968996D2347B30200324F4A /* PixelizationLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968996C2347B30200324F4A /* PixelizationLevel.swift */; };
 		6968996F234A6CC500324F4A /* UserDefaults+isFirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968996E234A6CC500324F4A /* UserDefaults+isFirstLaunch.swift */; };
+		69689975234AD48600324F4A /* Pixelizeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69689974234AD48600324F4A /* Pixelizeable.swift */; };
 		697ECAA32346613300F9954F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECAA22346613300F9954F /* AppDelegate.swift */; };
 		697ECAA92346613400F9954F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 697ECAA82346613400F9954F /* Assets.xcassets */; };
 		697ECAAF2346613400F9954F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 697ECAAD2346613400F9954F /* LaunchScreen.storyboard */; };
@@ -26,6 +27,7 @@
 		6968996C2347B30200324F4A /* PixelizationLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelizationLevel.swift; sourceTree = "<group>"; };
 		6968996E234A6CC500324F4A /* UserDefaults+isFirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+isFirstLaunch.swift"; sourceTree = "<group>"; };
 		69689970234A6FC000324F4A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		69689974234AD48600324F4A /* Pixelizeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixelizeable.swift; sourceTree = "<group>"; };
 		697ECA9F2346613300F9954F /* PixPik.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixPik.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		697ECAA22346613300F9954F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		697ECAA82346613400F9954F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,6 +48,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		69689971234AD3EB00324F4A /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				697ECAB62346615000F9954F /* CameraViewController.swift */,
+				694B23A42346678300DC565A /* CameraView.swift */,
+				694B23A6234685CE00DC565A /* PreviewViewController.swift */,
+				694B23A8234685D400DC565A /* PreviewView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		69689972234AD42500324F4A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6968996E234A6CC500324F4A /* UserDefaults+isFirstLaunch.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		69689973234AD44A00324F4A /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				6968996C2347B30200324F4A /* PixelizationLevel.swift */,
+				697ECAB82346618F00F9954F /* FrameExtractor.swift */,
+				69689974234AD48600324F4A /* Pixelizeable.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		697ECA962346613300F9954F = {
 			isa = PBXGroup;
 			children = (
@@ -66,13 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				697ECAA22346613300F9954F /* AppDelegate.swift */,
-				697ECAB62346615000F9954F /* CameraViewController.swift */,
-				6968996E234A6CC500324F4A /* UserDefaults+isFirstLaunch.swift */,
-				694B23A42346678300DC565A /* CameraView.swift */,
-				6968996C2347B30200324F4A /* PixelizationLevel.swift */,
-				694B23A6234685CE00DC565A /* PreviewViewController.swift */,
-				694B23A8234685D400DC565A /* PreviewView.swift */,
-				697ECAB82346618F00F9954F /* FrameExtractor.swift */,
+				69689971234AD3EB00324F4A /* Screens */,
+				69689972234AD42500324F4A /* Extensions */,
+				69689973234AD44A00324F4A /* Filter */,
 				697ECAA82346613400F9954F /* Assets.xcassets */,
 				697ECAAD2346613400F9954F /* LaunchScreen.storyboard */,
 				697ECAB02346613400F9954F /* Info.plist */,
@@ -157,6 +184,7 @@
 				694B23A9234685D400DC565A /* PreviewView.swift in Sources */,
 				697ECAB92346618F00F9954F /* FrameExtractor.swift in Sources */,
 				694B23A52346678300DC565A /* CameraView.swift in Sources */,
+				69689975234AD48600324F4A /* Pixelizeable.swift in Sources */,
 				697ECAB72346615000F9954F /* CameraViewController.swift in Sources */,
 				694B23A7234685CE00DC565A /* PreviewViewController.swift in Sources */,
 			);

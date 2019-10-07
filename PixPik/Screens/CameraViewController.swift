@@ -55,19 +55,6 @@ final class CameraViewController: UIViewController {
         ])
     }
     
-    private func pixelize(image: CIImage) -> CIImage? {
-        let filter = CIFilter(name:"CIHexagonalPixellate")
-        filter?.setValue(image, forKey: kCIInputImageKey)
-        filter?.setValue(pixelizationLevel.intensity, forKey: kCIInputScaleKey)
-        return filter?.outputImage!.cropped(to: CGRect(
-            x: 0,
-            y: 0,
-            width: image.extent.size.width - CGFloat(integerLiteral: pixelizationLevel.intensity) * 2,
-            height: image.extent.size.height - CGFloat(integerLiteral: pixelizationLevel.intensity) * 2
-            )
-        )
-    }
-    
     private func showPreview(image: UIImage, pixelizationLevel: PixelizationLevel) {
         let previewViewController = PreviewViewController(
             image: image,
@@ -80,15 +67,12 @@ final class CameraViewController: UIViewController {
 extension CameraViewController: FrameExtractorDelegate {
     
     func captured(image: CIImage) {
-        guard let pixelizedCImage = pixelize(image: image) else {
+        guard let pixelizedImage = pixelize(ciImage: image, intensity: pixelizationLevel.intensity) else {
             return
         }
         
-        let pixelizedImage = UIImage(ciImage: pixelizedCImage)
-        
         cameraView.update(with: pixelizedImage)
-        
-        currentImage = UIImage(ciImage: image)
+        currentImage = pixelizedImage
     }
 }
 
@@ -135,3 +119,5 @@ extension CameraViewController: UIImagePickerControllerDelegate {
 extension CameraViewController: UINavigationControllerDelegate {
     
 }
+
+extension CameraViewController: Pixelizeable {}

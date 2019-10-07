@@ -48,33 +48,10 @@ final class PreviewViewController: UIViewController {
     }
     
     private func applyFilter() {
-        guard let ciImage = makeCIImage(from: image) else {
+        guard let pixelizedImage = pixelize(image: image, intensity: pixelizationLevel.intensity) else {
             return
         }
-        
-        let filter = CIFilter(name:"CIHexagonalPixellate")
-        filter?.setValue(ciImage, forKey: kCIInputImageKey)
-        filter?.setValue(pixelizationLevel.intensity, forKey: kCIInputScaleKey)
-        guard let pixelizedCIImage = filter?.outputImage else { return }
-        
-        let croppedImage = pixelizedCIImage.cropped(to: CGRect(
-            x: 0,
-            y: 0,
-            width: ciImage.extent.size.width - CGFloat(integerLiteral: pixelizationLevel.intensity) * 2,
-            height: ciImage.extent.size.height - CGFloat(integerLiteral: pixelizationLevel.intensity) * 2
-            )
-        )
-        
-        let pixelizedImage = UIImage(ciImage: croppedImage)
         previewView.update(with: pixelizedImage)
-    }
-    
-    private func makeCIImage(from image: UIImage) -> CIImage? {
-        if let ciImage = image.ciImage {
-            return ciImage
-        } else {
-            return CIImage(image: image)
-        }
     }
 }
 
@@ -124,12 +101,23 @@ extension PreviewViewController: PreviewViewDelegate {
         UIImageWriteToSavedPhotosAlbum(newImage, self, #selector(saved), nil)
     }
     
-    func cgImage(from ciImage: CIImage) -> CGImage? {
+    func pixelizationLevelIncreased(in: PreviewView) {
+        pixelizationLevel = pixelizationLevel.incrementedValue
+        applyFilter()
+    }
+    
+    func pixelizationLevelDecreased(in: PreviewView) {
+        pixelizationLevel = pixelizationLevel.decrementedValue
+        applyFilter()
+    }
+    
+    private func cgImage(from ciImage: CIImage) -> CGImage? {
         let context = CIContext(options: nil)
         return context.createCGImage(ciImage, from: ciImage.extent)
     }
     
-    @objc func saved(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
+    @objc
+    private func saved(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
         let alertController: UIAlertController
         
         if error == nil {
@@ -146,14 +134,6 @@ extension PreviewViewController: PreviewViewDelegate {
 
         navigationController?.present(alertController, animated: true, completion: nil)
     }
-    
-    func pixelizationLevelIncreased(in: PreviewView) {
-        pixelizationLevel = pixelizationLevel.incrementedValue
-        applyFilter()
-    }
-    
-    func pixelizationLevelDecreased(in: PreviewView) {
-        pixelizationLevel = pixelizationLevel.decrementedValue
-        applyFilter()
-    }
 }
+
+extension PreviewViewController: Pixelizeable {}
