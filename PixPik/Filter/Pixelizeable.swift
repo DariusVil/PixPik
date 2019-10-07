@@ -1,10 +1,6 @@
 import UIKit
 
-protocol Pixelizeable {
-    
-//    func pixelize(image: UIImage, intensity: Int) -> UIImage?
-//    func pixelize(image: CIImage, intensity: Int) -> UIImage?
-}
+protocol Pixelizeable { }
 
 extension Pixelizeable where Self : UIViewController {
         
