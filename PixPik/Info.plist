@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Allow to save image to your library</string>
+	<string>This allows the app to save photos to your phone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow to load photo from your library</string>
+	<string>This allows the app to load photos from your phone.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -31,7 +31,7 @@
 		<string>armv7</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera permission is required</string>
+	<string>This allows the access to your phone camera. Since this is a camera application the app will not be useful without this permission.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
