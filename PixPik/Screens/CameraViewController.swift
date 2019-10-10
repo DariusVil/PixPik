@@ -16,7 +16,6 @@ final class CameraViewController: UIViewController {
     private lazy var imagePicker: UIImagePickerController = {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        pickerController.allowsEditing = true
         pickerController.mediaTypes = ["public.image"]
         pickerController.sourceType = .photoLibrary
         return pickerController
@@ -108,11 +107,33 @@ extension CameraViewController: CameraViewDelegate {
 extension CameraViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.editedImage] as? UIImage else { return }
+        guard let image = info[.originalImage] as? UIImage else { return }
+        let normalizedImage = fixOrientation(image: image)
         picker.dismiss(animated: true, completion: { [weak self] in
             guard let pixelizationLevel = self?.pixelizationLevel else { return }
-            self?.showPreview(image: image, pixelizationLevel: pixelizationLevel)
+            self?.showPreview(image: normalizedImage, pixelizationLevel: pixelizationLevel)
         })
+    }
+    
+    // Needed because
+    private func fixOrientation(image: UIImage) -> UIImage {
+        if image.imageOrientation == .up {
+            return image
+        }
+
+        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+        let rect = CGRect(
+            x: 0,
+            y: 0,
+            width: image.size.width,
+            height: image.size.height
+        )
+        image.draw(in: rect)
+
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        return normalizedImage
     }
 }
 
