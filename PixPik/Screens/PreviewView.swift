@@ -125,7 +125,8 @@ final class PreviewView: UIView {
         addGestureRecognizer(swipeRightGesture)
     }
 
-    @objc private func handleSwipeGesture(gesture: UIGestureRecognizer) {
+    @objc
+    private func handleSwipeGesture(gesture: UIGestureRecognizer) {
         guard let swipeGesture = gesture as? UISwipeGestureRecognizer else { return }
         
         switch swipeGesture.direction {
@@ -169,15 +170,18 @@ final class PreviewView: UIView {
         ])
     }
     
-    @objc func shareTapped(gesture: UIGestureRecognizer) {
+    @objc
+    private func shareTapped(gesture: UIGestureRecognizer) {
         delegate?.shareTapped(in: self)
     }
     
-    @objc func saveTapped(gesture: UIGestureRecognizer) {
+    @objc
+    private func saveTapped(gesture: UIGestureRecognizer) {
         delegate?.saveTapped(in: self)
     }
     
-    @objc func closeTapped(gesture: UIGestureRecognizer) {
+    @objc
+    private func closeTapped(gesture: UIGestureRecognizer) {
         delegate?.closeTapped(in: self)
     }
 }

@@ -145,20 +145,23 @@ final class CameraView: UIView {
         ])
     }
     
-    @objc func shutterTapped(gesture: UIGestureRecognizer) {
+    @objc
+    private func shutterTapped(gesture: UIGestureRecognizer) {
         delegate?.shutterTapped(in: self)
     }
     
-    @objc func switchTapped(gesture: UIGestureRecognizer) {
+    @objc
+    private func switchTapped(gesture: UIGestureRecognizer) {
         delegate?.switchTapped(in: self)
     }
     
-    @objc func libraryTapped(gesture: UIGestureRecognizer) {
+    @objc
+    private func libraryTapped(gesture: UIGestureRecognizer) {
         delegate?.libraryTapped(in: self)
     }
     
-    @objc func respondToSwipeGestures(gesture: UIGestureRecognizer)
-    {
+    @objc
+    private func respondToSwipeGestures(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer
         {
             switch swipeGesture.direction
