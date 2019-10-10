@@ -5,7 +5,7 @@ protocol FrameCaptureManagerDelegate: class {
     func captured(image: CIImage)
 }
 
-class FrameCaptureManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+final class FrameCaptureManager: NSObject {
     
     private(set) var position = AVCaptureDevice.Position.back
     private let quality = AVCaptureSession.Preset.photo
@@ -73,6 +73,9 @@ class FrameCaptureManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         return CIImage(cvPixelBuffer: imageBuffer)
     }
+}
+
+extension FrameCaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
