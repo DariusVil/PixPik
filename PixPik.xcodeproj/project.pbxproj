@@ -17,7 +17,7 @@
 		697ECAA92346613400F9954F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 697ECAA82346613400F9954F /* Assets.xcassets */; };
 		697ECAAF2346613400F9954F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 697ECAAD2346613400F9954F /* LaunchScreen.storyboard */; };
 		697ECAB72346615000F9954F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECAB62346615000F9954F /* CameraViewController.swift */; };
-		697ECAB92346618F00F9954F /* FrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECAB82346618F00F9954F /* FrameExtractor.swift */; };
+		697ECAB92346618F00F9954F /* FrameCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECAB82346618F00F9954F /* FrameCaptureManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,7 @@
 		697ECAAE2346613400F9954F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		697ECAB02346613400F9954F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		697ECAB62346615000F9954F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		697ECAB82346618F00F9954F /* FrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameExtractor.swift; sourceTree = "<group>"; };
+		697ECAB82346618F00F9954F /* FrameCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameCaptureManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				6968996C2347B30200324F4A /* PixelizationLevel.swift */,
-				697ECAB82346618F00F9954F /* FrameExtractor.swift */,
+				697ECAB82346618F00F9954F /* FrameCaptureManager.swift */,
 				69689974234AD48600324F4A /* Pixelizeable.swift */,
 			);
 			path = Filter;
@@ -182,7 +182,7 @@
 				697ECAA32346613300F9954F /* AppDelegate.swift in Sources */,
 				6968996D2347B30200324F4A /* PixelizationLevel.swift in Sources */,
 				694B23A9234685D400DC565A /* PreviewView.swift in Sources */,
-				697ECAB92346618F00F9954F /* FrameExtractor.swift in Sources */,
+				697ECAB92346618F00F9954F /* FrameCaptureManager.swift in Sources */,
 				694B23A52346678300DC565A /* CameraView.swift in Sources */,
 				69689975234AD48600324F4A /* Pixelizeable.swift in Sources */,
 				697ECAB72346615000F9954F /* CameraViewController.swift in Sources */,

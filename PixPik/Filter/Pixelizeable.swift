@@ -16,6 +16,7 @@ extension Pixelizeable where Self : UIViewController {
         
         guard let pixelizedCIImage = filter?.outputImage else { return nil}
         
+        // Cropping is needed because after applying filter the image becomes larger
         let croppedCIImage = pixelizedCIImage.cropped(
             to: CGRect(
                 x: 0,
@@ -26,6 +27,10 @@ extension Pixelizeable where Self : UIViewController {
         )
         
         return UIImage(ciImage: croppedCIImage)
+    }
+    
+    private func normalizeSize(ciImage: CIImage) {
+        
     }
     
     // This solves a problem that image.ciImage will be nil if its created from cgImage

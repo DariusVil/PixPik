@@ -1,11 +1,11 @@
 import UIKit
 import AVFoundation
 
-protocol FrameExtractorDelegate: class {
+protocol FrameCaptureManagerDelegate: class {
     func captured(image: CIImage)
 }
 
-class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+class FrameCaptureManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     private(set) var position = AVCaptureDevice.Position.back
     private let quality = AVCaptureSession.Preset.photo
@@ -15,7 +15,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let captureSession = AVCaptureSession()
     private let context = CIContext()
     
-    weak var delegate: FrameExtractorDelegate?
+    weak var delegate: FrameCaptureManagerDelegate?
     
     init(position: AVCaptureDevice.Position) {
         self.position = position

@@ -2,7 +2,7 @@ import UIKit
 
 final class CameraViewController: UIViewController {
     
-    private var frameExtractor: FrameExtractor?
+    private var frameCaptureManager: FrameCaptureManager?
     private var pixelizationLevel: PixelizationLevel = .medium
     private var currentImage: UIImage?
     
@@ -40,8 +40,8 @@ final class CameraViewController: UIViewController {
     }
 
     private func setupFrameExtractor() {
-        frameExtractor = FrameExtractor(position: .back)
-        frameExtractor?.delegate = self
+        frameCaptureManager = FrameCaptureManager(position: .back)
+        frameCaptureManager?.delegate = self
     }
     
     private func setupView() {
@@ -64,7 +64,7 @@ final class CameraViewController: UIViewController {
     }
 }
 
-extension CameraViewController: FrameExtractorDelegate {
+extension CameraViewController: FrameCaptureManagerDelegate {
     
     func captured(image: CIImage) {
         guard let pixelizedImage = pixelize(ciImage: image, intensity: pixelizationLevel.intensity) else {
@@ -92,12 +92,12 @@ extension CameraViewController: CameraViewDelegate {
     }
     
     func switchTapped(in: CameraView) {
-        guard let currentCameraPosition = frameExtractor?.position else { return }
+        guard let currentCameraPosition = frameCaptureManager?.position else { return }
         
-        frameExtractor = FrameExtractor(
+        frameCaptureManager = FrameCaptureManager(
             position: currentCameraPosition == .back ? .front : .back
         )
-        frameExtractor?.delegate = self
+        frameCaptureManager?.delegate = self
     }
     
     func libraryTapped(in: CameraView) {
