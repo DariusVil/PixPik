@@ -28,11 +28,7 @@ extension Pixelizeable where Self : UIViewController {
         
         return UIImage(ciImage: croppedCIImage)
     }
-    
-    private func normalizeSize(ciImage: CIImage) {
-        
-    }
-    
+
     // This solves a problem that image.ciImage will be nil if its created from cgImage
     private func makeCIImage(from image: UIImage) -> CIImage? {
         if let ciImage = image.ciImage {
