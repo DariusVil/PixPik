@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18587A020E45BC96BEF8433A /* EarlGrey.framework in EarlGrey Copy Files */ = {isa = PBXBuildFile; fileRef = A6F6136E2B9A21CF3B5921FF /* EarlGrey.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		39B560338B4ED0861C627C80 /* EarlGrey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8866414F5E057F9295B1508 /* EarlGrey.swift */; };
+		5B47A3BCAABC22401A415F89 /* EarlGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6F6136E2B9A21CF3B5921FF /* EarlGrey.framework */; };
 		694B23A52346678300DC565A /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694B23A42346678300DC565A /* CameraView.swift */; };
 		694B23A7234685CE00DC565A /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694B23A6234685CE00DC565A /* PreviewViewController.swift */; };
 		694B23A9234685D400DC565A /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694B23A8234685D400DC565A /* PreviewView.swift */; };
@@ -18,7 +21,32 @@
 		697ECAAF2346613400F9954F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 697ECAAD2346613400F9954F /* LaunchScreen.storyboard */; };
 		697ECAB72346615000F9954F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECAB62346615000F9954F /* CameraViewController.swift */; };
 		697ECAB92346618F00F9954F /* FrameCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECAB82346618F00F9954F /* FrameCaptureManager.swift */; };
+		69D290812378840D00C3FA0B /* EarlGreyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D290802378840D00C3FA0B /* EarlGreyTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		69D290832378840D00C3FA0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 697ECA972346613300F9954F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 697ECA9E2346613300F9954F;
+			remoteInfo = PixPik;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3AC64F484617D034A7445F07 /* EarlGrey Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(TEST_HOST)/../";
+			dstSubfolderSpec = 0;
+			files = (
+				18587A020E45BC96BEF8433A /* EarlGrey.framework in EarlGrey Copy Files */,
+			);
+			name = "EarlGrey Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		694B23A42346678300DC565A /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -35,6 +63,11 @@
 		697ECAB02346613400F9954F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		697ECAB62346615000F9954F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		697ECAB82346618F00F9954F /* FrameCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameCaptureManager.swift; sourceTree = "<group>"; };
+		69D2907E2378840D00C3FA0B /* EarlGreyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarlGreyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		69D290802378840D00C3FA0B /* EarlGreyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarlGreyTests.swift; sourceTree = "<group>"; };
+		69D290822378840D00C3FA0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6F6136E2B9A21CF3B5921FF /* EarlGrey.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EarlGrey.framework; path = Carthage/Build/iOS/EarlGrey.framework; sourceTree = SOURCE_ROOT; };
+		A8866414F5E057F9295B1508 /* EarlGrey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EarlGrey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +75,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69D2907B2378840D00C3FA0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B47A3BCAABC22401A415F89 /* EarlGrey.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +122,9 @@
 			isa = PBXGroup;
 			children = (
 				697ECAA12346613300F9954F /* PixPik */,
+				69D2907F2378840D00C3FA0B /* EarlGreyTests */,
 				697ECAA02346613300F9954F /* Products */,
+				A583AA1254BAE6B3A4AB7061 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				697ECA9F2346613300F9954F /* PixPik.app */,
+				69D2907E2378840D00C3FA0B /* EarlGreyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,6 +150,24 @@
 				69689970234A6FC000324F4A /* README.md */,
 			);
 			path = PixPik;
+			sourceTree = "<group>";
+		};
+		69D2907F2378840D00C3FA0B /* EarlGreyTests */ = {
+			isa = PBXGroup;
+			children = (
+				69D290802378840D00C3FA0B /* EarlGreyTests.swift */,
+				69D290822378840D00C3FA0B /* Info.plist */,
+				A8866414F5E057F9295B1508 /* EarlGrey.swift */,
+			);
+			path = EarlGreyTests;
+			sourceTree = "<group>";
+		};
+		A583AA1254BAE6B3A4AB7061 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6F6136E2B9A21CF3B5921FF /* EarlGrey.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,18 +190,41 @@
 			productReference = 697ECA9F2346613300F9954F /* PixPik.app */;
 			productType = "com.apple.product-type.application";
 		};
+		69D2907D2378840D00C3FA0B /* EarlGreyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69D290872378840D00C3FA0B /* Build configuration list for PBXNativeTarget "EarlGreyTests" */;
+			buildPhases = (
+				69D2907A2378840D00C3FA0B /* Sources */,
+				69D2907B2378840D00C3FA0B /* Frameworks */,
+				69D2907C2378840D00C3FA0B /* Resources */,
+				3AC64F484617D034A7445F07 /* EarlGrey Copy Files */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				69D290842378840D00C3FA0B /* PBXTargetDependency */,
+			);
+			name = EarlGreyTests;
+			productName = EarlGreyTests;
+			productReference = 69D2907E2378840D00C3FA0B /* EarlGreyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		697ECA972346613300F9954F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Darius Vilcinskis";
 				TargetAttributes = {
 					697ECA9E2346613300F9954F = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					69D2907D2378840D00C3FA0B = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = 697ECA9E2346613300F9954F;
 					};
 				};
 			};
@@ -157,6 +242,7 @@
 			projectRoot = "";
 			targets = (
 				697ECA9E2346613300F9954F /* PixPik */,
+				69D2907D2378840D00C3FA0B /* EarlGreyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -168,6 +254,13 @@
 			files = (
 				697ECAAF2346613400F9954F /* LaunchScreen.storyboard in Resources */,
 				697ECAA92346613400F9954F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69D2907C2378840D00C3FA0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +283,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		69D2907A2378840D00C3FA0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69D290812378840D00C3FA0B /* EarlGreyTests.swift in Sources */,
+				39B560338B4ED0861C627C80 /* EarlGrey.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		69D290842378840D00C3FA0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 697ECA9E2346613300F9954F /* PixPik */;
+			targetProxy = 69D290832378840D00C3FA0B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		697ECAAD2346613400F9954F /* LaunchScreen.storyboard */ = {
@@ -364,6 +474,52 @@
 			};
 			name = Release;
 		};
+		69D290852378840D00C3FA0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M5PNX43K4J;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/**";
+				INFOPLIST_FILE = EarlGreyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = telecast.EarlGreyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PixPik.app/PixPik";
+			};
+			name = Debug;
+		};
+		69D290862378840D00C3FA0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M5PNX43K4J;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/**";
+				INFOPLIST_FILE = EarlGreyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = telecast.EarlGreyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PixPik.app/PixPik";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -381,6 +537,15 @@
 			buildConfigurations = (
 				697ECAB42346613400F9954F /* Debug */,
 				697ECAB52346613400F9954F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69D290872378840D00C3FA0B /* Build configuration list for PBXNativeTarget "EarlGreyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69D290852378840D00C3FA0B /* Debug */,
+				69D290862378840D00C3FA0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
